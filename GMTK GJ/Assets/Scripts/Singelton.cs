@@ -23,5 +23,5 @@ public class Singelton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    private static T s_Instance;
+    protected static T s_Instance;
 }

@@ -145,7 +145,7 @@ namespace GMTKGJ
             if (m_IsDashing)
                 Dash();
 
-            if (m_IsGrounded && m_IsDashTime)
+            if ((m_IsGrounded || m_IsTouchingWall) && m_IsDashTime)
                 m_CanDash = true;
 
             // Gravity Scaling

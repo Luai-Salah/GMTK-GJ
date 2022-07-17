@@ -10,6 +10,9 @@ namespace GMTKGJ
         public float GravityScale { get { return m_GravityScale; } set { m_GravityScale = value; } }
         public float FallGravityMultiplier { get { return m_FallGravityMultiplier; } set { m_FallGravityMultiplier = value; } }
 
+        public bool CollectWallJump { get { return m_CollectWallJump; } set { m_CollectWallJump = value; } }
+        public bool CollectDash { get { return m_CollectDash; } set { m_CollectDash = value; } }
+
         public bool FacingRight { get { return m_FacingRight; } }
 
         [Header("Movement")]
@@ -60,11 +63,13 @@ namespace GMTKGJ
 
         // Wall Jump
         private bool m_WallJumping = false;
+        private bool m_CollectWallJump = false;
 
         // Dash
         private bool m_IsDashing = false;
         private bool m_CanDash = true;
         private bool m_IsDashTime = false;
+        private bool m_CollectDash = false;
 
         // Ground Check
         private bool m_IsGrounded = false;
@@ -101,6 +106,9 @@ namespace GMTKGJ
             else m_IsGrounded = false;
 
             m_IsTouchingWall = Physics2D.OverlapCircle(m_WallCheck.position, m_WallCheckRadius, m_WallLayer);
+
+            if (!m_IsGrounded && m_WasGrounded && m_Rigidbody.velocity.y > 0.1f)
+                AudioManager.PlaySound("Jump");
         }
 
         public void Move(float move)
@@ -133,7 +141,7 @@ namespace GMTKGJ
             m_LastJumpTime -= Time.deltaTime;
 
             // Wall Jumping
-            m_IsSliding = m_IsTouchingWall && !m_IsGrounded && move != 0.0f;
+            m_IsSliding = m_IsTouchingWall && !m_IsGrounded && move != 0.0f && m_CollectWallJump;
 
             if (m_IsSliding)
             {
@@ -224,13 +232,14 @@ namespace GMTKGJ
 
         public void OnDash(InputAction.CallbackContext context)
         {
-            if (!m_IsDashing && m_CanDash)
+            if (!m_IsDashing && m_CanDash && CollectDash)
             {
                 m_IsDashing = true;
                 m_CanDash = false;
                 m_IsDashTime = false;
                 m_Rigidbody.gravityScale = 0;
                 m_Rigidbody.velocity = Vector2.zero;
+                AudioManager.PlaySound("Dash");
                 StartCoroutine(StopDash());
             }
         }

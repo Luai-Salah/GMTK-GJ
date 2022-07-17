@@ -35,11 +35,12 @@ namespace GMTKGJ {
 
         private AudioSource m_Source;
 
-        public void Play()
+        public void Play(float time = 0.0f)
         {
             m_Source.volume = Volume * (1 + Random.Range(-RandomVolume / 2f, RandomVolume / 2f));
             m_Source.pitch = Pitch * (1 + Random.Range(-RandomPitch / 2f, RandomPitch / 2f));
             m_Source.loop = Loop;
+            m_Source.time = time;
             m_Source.Play();
         }
     }

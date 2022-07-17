@@ -70,18 +70,28 @@ namespace GMTKGJ
 
             switch (m_Event)
             {
+                case 1:
+                    MusicManager.StopMusic("Attrition");
+                    break;
                 case 2:
                     m_VolumeAnimator.SetTrigger("Out");
+                    MusicManager.StopMusic("Sorrow");
+                    break;
+                case 3:
+                    MusicManager.StopMusic("Anger");
                     break;
                 case 4:
                     CancelInvoke("StopMomentom");
+                    MusicManager.StopMusic("Anxiety");
                     break;
                 case 5:
                     m_Motor.GravityScale = m_OGS;
                     m_Motor.FallGravityMultiplier = m_OFGM;
+                    MusicManager.StopMusic("Nastalogy");
                     break;
                 case 6:
                     Time.timeScale = 1.0f;
+                    MusicManager.StopMusic("Panic");
                     break;
                 default:
                     break;
@@ -101,6 +111,7 @@ namespace GMTKGJ
 
             m_DiceAnimator.SetTrigger("Roll");
             m_DiceImage.sprite = m_DiceFaces[m_Event - 1];
+            AudioManager.PlaySound("Dice");
 
             Invoke("EventCoolDown", m_EventDuration);
 
@@ -109,20 +120,24 @@ namespace GMTKGJ
                 case 1:
                     m_EventText.text = "Attrition";
                     m_EventText.color = Color.cyan;
+                    MusicManager.UpdateMusic("Attrition");
                     break;
                 case 2:
                     m_VolumeAnimator.SetTrigger("In");
                     m_EventText.text = "Sorrow";
                     m_EventText.color = Color.gray;
+                    MusicManager.UpdateMusic("Sorrow");
                     break;
                 case 3:
                     m_EventText.text = "Anger";
                     m_EventText.color = Color.red;
+                    MusicManager.UpdateMusic("Anger");
                     break;
                 case 4:
                     InvokeRepeating("StopMomentom", m_TimeBetweenStops, m_TimeBetweenStops);
                     m_EventText.text = "Anxiety";
                     m_EventText.color = Color.black;
+                    MusicManager.UpdateMusic("Anxiety");
                     break;
                 case 5:
                     m_OGS = m_Motor.GravityScale;
@@ -131,11 +146,13 @@ namespace GMTKGJ
                     m_Motor.FallGravityMultiplier = m_FallGravityMultiplier;
                     m_EventText.text = "Nastalogy";
                     m_EventText.color = Color.blue;
+                    MusicManager.UpdateMusic("Nastalogy");
                     break;
                 case 6:
                     Time.timeScale = m_GameSpeed;
                     m_EventText.text = "Panic";
                     m_EventText.color = Color.yellow;
+                    MusicManager.UpdateMusic("Panic");
                     break;
                 default:
                     break;

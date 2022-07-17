@@ -29,10 +29,47 @@ namespace GMTKGJ
             }
         }
 
-        public static void PlaySound(string name) => s_Instance.PlaySoundImpl(name);
-        public static void PlaySound(int index) => s_Instance.PlaySoundImpl(index);
+        public static Sound PlaySound(string name, float time = 0.0f) { return Instance.PlaySoundImpl(name, time); }
+        public static Sound PlaySound(int index, float time = 0.0f) { return Instance.PlaySoundImpl(index, time); }
 
-        private void PlaySoundImpl(string name)
+        public static void StopSound(string name) => Instance.StopSoundImpl(name);
+        public static void StopSound(int index) => Instance.StopSoundImpl(index);
+
+        private Sound PlaySoundImpl(string name, float time)
+        {
+            if (!m_SoundsIndex.TryGetValue(name, out int index))
+            {
+                Debug.LogError($"AudioManager: Sound '{name}' not found!", this);
+                return null;
+            }
+
+            return PlaySoundImpl(index, time);
+        }
+
+        private Sound PlaySoundImpl(int index, float time)
+        {
+            if (index < 0 || index >= m_Sounds.Length)
+            {
+                Debug.LogError($"AudioManager: Sound with index ({index}) not found!", this);
+                return null;
+            }
+
+            Sound s = m_Sounds[index];
+
+            if (!s.PlayedConstantly)
+                s.Play(time);
+            else
+            {
+                s.Source = s.GameObject.AddComponent<AudioSource>();
+
+                s.Play(time);
+                Destroy(s.Source, s.Clip.length);
+            }
+
+            return s;
+        }
+
+        private void StopSoundImpl(string name)
         {
             if (!m_SoundsIndex.TryGetValue(name, out int index))
             {
@@ -40,28 +77,12 @@ namespace GMTKGJ
                 return;
             }
 
-            PlaySoundImpl(index);
+            StopSoundImpl(index);
         }
 
-        private void PlaySoundImpl(int index)
+        private void StopSoundImpl(int index)
         {
-            if (index < 0 || index >= m_Sounds.Length)
-            {
-                Debug.LogError($"AudioManager: Sound with index ({index}) not found!", this);
-                return;
-            }
-
-            Sound s = m_Sounds[index];
-
-            if (!s.PlayedConstantly)
-                s.Play();
-            else
-            {
-                s.Source = s.GameObject.AddComponent<AudioSource>();
-
-                s.Play();
-                Destroy(s.Source, s.Clip.length);
-            }
+            m_Sounds[index].Source.Stop();
         }
     }
 }

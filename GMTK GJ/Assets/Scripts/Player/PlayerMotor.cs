@@ -139,7 +139,8 @@ namespace GMTKGJ
             {
                 Vector2 rbv = m_Rigidbody.velocity;
                 m_Rigidbody.velocity = new Vector2(rbv.x, Mathf.Clamp(rbv.y, -m_WallSlidingSpeed, float.MaxValue));
-            }
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            } else transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             if (m_WallJumping)
                 WallJump();
@@ -266,6 +267,8 @@ namespace GMTKGJ
             m_Animator.SetFloat("Speed", Mathf.Abs(move));
             m_Animator.SetFloat("vSpeed", m_Rigidbody.velocity.y);
             m_Animator.SetBool("IsGrounded", m_IsGrounded);
+            m_Animator.SetBool("IsDashing", m_IsDashing);
+            m_Animator.SetBool("WallSliding", m_IsSliding);
         }
 
         private void Flip()

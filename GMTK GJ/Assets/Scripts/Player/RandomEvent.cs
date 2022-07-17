@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.UI;
+using TMPro;
 
 // 1 - attrition : vertical deadly rays of light spawning randomly
 // 2 - sorrow : blurry screen/mineraft nausea ? 
@@ -17,6 +18,8 @@ namespace GMTKGJ
 
         [SerializeField] private float m_EventDuration = 15f;
         [SerializeField] private float m_EventCoolDown = 15f;
+
+        [SerializeField] private Sprite[] m_DiceFaces;
 
         [Header("Anger")]
         [SerializeField] private float m_TimeAllowedOnGround = 1.0f;
@@ -37,15 +40,27 @@ namespace GMTKGJ
 
         private bool m_CoolDown = false;
         private int m_Event = 0;
-        private int m_LastEvent = 0;
+        private float m_EffectTimer = 0.0f;
+        private float m_CoolDownTimer = 0.0f;
 
         private PlayerMotor m_Motor;
         private Animator m_VolumeAnimator;
+        private Animator m_DiceAnimator;
+        private Image m_DiceImage;
+        private TextMeshProUGUI m_NextRollText;
+        private TextMeshProUGUI m_EventText;
 
         private void Start()
         {
             m_Motor = GetComponent<PlayerMotor>();
             m_VolumeAnimator = GameObject.FindGameObjectWithTag("Volume").GetComponent<Animator>();
+
+            Transform dice = GameObject.FindGameObjectWithTag("Dice").transform;
+            m_DiceAnimator = dice.GetComponentInChildren<Animator>();
+            m_DiceImage = dice.GetComponentInChildren<Image>();
+            m_NextRollText = dice.transform.Find("Timer").GetComponentInChildren<TextMeshProUGUI>();
+            m_EventText = dice.transform.Find("Event").GetComponentInChildren<TextMeshProUGUI>();
+
             EventCoolDown();
         }
 
@@ -73,6 +88,10 @@ namespace GMTKGJ
             }
 
             Invoke("Roll", m_EventCoolDown);
+            m_CoolDownTimer = m_EventCoolDown;
+
+            m_EventText.color = Color.white;
+            m_EventText.text = "None";
         }
 
         private void Roll()
@@ -80,36 +99,75 @@ namespace GMTKGJ
             m_CoolDown = false;
             m_Event = Random.Range(1, 6);
 
-            m_LastEvent = m_Event;
+            m_DiceAnimator.SetTrigger("Roll");
+            m_DiceImage.sprite = m_DiceFaces[m_Event - 1];
 
             Invoke("EventCoolDown", m_EventDuration);
 
             switch (m_Event)
             {
+                case 1:
+                    m_EventText.text = "Attrition";
+                    m_EventText.color = Color.cyan;
+                    break;
                 case 2:
                     m_VolumeAnimator.SetTrigger("In");
+                    m_EventText.text = "Sorrow";
+                    m_EventText.color = Color.gray;
+                    break;
+                case 3:
+                    m_EventText.text = "Anger";
+                    m_EventText.color = Color.red;
                     break;
                 case 4:
                     InvokeRepeating("StopMomentom", m_TimeBetweenStops, m_TimeBetweenStops);
+                    m_EventText.text = "Anxiety";
+                    m_EventText.color = Color.black;
                     break;
                 case 5:
                     m_OGS = m_Motor.GravityScale;
                     m_OFGM = m_Motor.FallGravityMultiplier;
                     m_Motor.GravityScale = m_GravityScale;
                     m_Motor.FallGravityMultiplier = m_FallGravityMultiplier;
+                    m_EventText.text = "Nastalogy";
+                    m_EventText.color = Color.blue;
                     break;
                 case 6:
                     Time.timeScale = m_GameSpeed;
+                    m_EventText.text = "Panic";
+                    m_EventText.color = Color.yellow;
                     break;
                 default:
                     break;
             }
+
+            m_EffectTimer = m_EventDuration;
         }
 
         private void StopMomentom()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 30; i++)
                 m_Motor.Stop();
+        }
+
+        private void Update()
+        {
+            if (CoolDown)
+            {
+                m_CoolDownTimer -= Time.deltaTime;
+                if (m_CoolDownTimer <= 0.0f)
+                    m_CoolDownTimer = 0.0f;
+
+                m_NextRollText.text = $"Next Roll:{m_CoolDownTimer.ToString("0")}";
+            }
+            else
+            {
+                m_EffectTimer -= Time.deltaTime;
+                if (m_EffectTimer <= 0.0f)
+                    m_EffectTimer = 0.0f;
+
+                m_NextRollText.text = $"Cool Down:{m_EffectTimer.ToString("0")}";
+            }
         }
     }
 }

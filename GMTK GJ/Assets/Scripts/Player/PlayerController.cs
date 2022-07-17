@@ -30,6 +30,8 @@ namespace GMTKGJ
         {
             m_Move = InputSystem.Player.Move.ReadValue<float>();
             m_MoveY = InputSystem.Player.MoveY.ReadValue<float>();
+
+            m_Motor.Animate(m_Move);
         }
 
         private void FixedUpdate()

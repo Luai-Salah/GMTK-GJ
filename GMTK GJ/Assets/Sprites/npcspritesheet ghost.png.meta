@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 22d2c71c5465afc4398cb149b53c6d74
+guid: 90683d90781d31d4fa42feef5c06aa61
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GGplayer_ss1_0
+      name: npcspritesheet 64x64_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 184
-        width: 26
-        height: 61
+        x: 0
+        y: 178
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53f2bceb5bc9ec14bbf82e68ecdeccbe
-      internalID: 3424397
+      spriteID: 6c6b8d0d336c8244f891cdd5354ed38a
+      internalID: 1599632973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_1
+      name: npcspritesheet 64x64_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 184
-        width: 26
-        height: 61
+        x: 64
+        y: 178
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7369e73ef95ce043b27d14562106270
-      internalID: 1255734336
+      spriteID: 9f86a303ddc848448ad89af3c4a592e4
+      internalID: -723571908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_2
+      name: npcspritesheet 64x64_2
       rect:
         serializedVersion: 2
-        x: 69
-        y: 184
-        width: 26
-        height: 60
+        x: 128
+        y: 178
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cf51a1d1d8c4544c991ac932d397cff
-      internalID: 1940387621
+      spriteID: c856f2a887617164b8f7d13d9e57523a
+      internalID: -1556264070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_3
+      name: npcspritesheet 64x64_3
       rect:
         serializedVersion: 2
-        x: 107
-        y: 184
-        width: 26
-        height: 61
+        x: 192
+        y: 178
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,62 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fca1f636c67c6e4496d681f4f11b472
-      internalID: -1976315426
+      spriteID: dd9b4627a2c84b442aa125da41bbb261
+      internalID: 1789271237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_4
-      rect:
-        serializedVersion: 2
-        x: 147
-        y: 184
-        width: 26
-        height: 61
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 570bafb85e644874bbddc0d0217f1819
-      internalID: -816404063
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GGplayer_ss1_5
-      rect:
-        serializedVersion: 2
-        x: 185
-        y: 184
-        width: 26
-        height: 60
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 48053543cac60b5459901d71f404599b
-      internalID: -787204090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GGplayer_ss1_6
+      name: npcspritesheet 64x64_4
       rect:
         serializedVersion: 2
         x: 7
-        y: 99
-        width: 23
-        height: 61
+        y: 0
+        width: 33
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfc3068c4013a3841a95106088ca7584
-      internalID: 1672003278
+      spriteID: ffdde6db0221e6d44a7d28e37ac914c0
+      internalID: -416772400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_7
+      name: npcspritesheet 64x64_5
       rect:
         serializedVersion: 2
-        x: 41
-        y: 99
-        width: 22
-        height: 61
+        x: 247
+        y: 1
+        width: 33
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d16c0dd30ea2595488b8ee51b4f730bc
-      internalID: 1954098978
+      spriteID: 3670fe007af778b4da76b79c4f2e1d96
+      internalID: 908357085
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_8
+      name: npcspritesheet 64x64_6
       rect:
         serializedVersion: 2
-        x: 76
-        y: 99
-        width: 22
-        height: 61
+        x: 55
+        y: 1
+        width: 33
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a13503e2c8cdd94ba8c500b098e00f8
-      internalID: -1291335962
+      spriteID: 6f9609b4ff6eb104481d320ea1b030a1
+      internalID: 1487365743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_9
+      name: npcspritesheet 64x64_7
       rect:
         serializedVersion: 2
-        x: 111
-        y: 99
-        width: 23
-        height: 59
+        x: 103
+        y: 1
+        width: 33
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +265,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c5d9ac0ccf405429ed362360e81c10
-      internalID: 71316524
+      spriteID: dda885297da49754a9fe988041059764
+      internalID: -2146664056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_10
+      name: npcspritesheet 64x64_8
       rect:
         serializedVersion: 2
-        x: 150
-        y: 99
-        width: 22
-        height: 59
+        x: 152
+        y: 1
+        width: 32
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,20 +286,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d00c79c91ecc4614f80a1d2ab2a601f0
-      internalID: 1045107408
+      spriteID: 47d7f8b2167132245a4b7eb8a1ebdbf1
+      internalID: 1274747022
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GGplayer_ss1_11
+      name: npcspritesheet 64x64_9
       rect:
         serializedVersion: 2
-        x: 188
-        y: 99
-        width: 22
-        height: 59
+        x: 199
+        y: 1
+        width: 33
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,92 +307,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e22d9d627b2767649987b159133cce61
-      internalID: 58733013
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GGplayer_ss1_12
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 27
-        width: 29
-        height: 59
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8bbbb8c94faed644a66c9f452e83cda
-      internalID: 2029875918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GGplayer_ss1_13
-      rect:
-        serializedVersion: 2
-        x: 62
-        y: 28
-        width: 22
-        height: 58
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09a0a8f927bd66e4293601aebffae212
-      internalID: 320540915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GGplayer_ss1_14
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 28
-        width: 21
-        height: 60
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ebef812553bb6c04a9c157ef86eb6865
-      internalID: -1525019295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GGplayer_ss1_15
-      rect:
-        serializedVersion: 2
-        x: 153
-        y: 36
-        width: 28
-        height: 51
-      alignment: 9
-      pivot: {x: 0.26, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 198a043758a1aa84b8c3daa8368061ba
-      internalID: -372832588
+      spriteID: b19a0cddb08989846b49eedc2a32e7ed
+      internalID: 157108584
       vertices: []
       indices: 
       edges: []
@@ -450,22 +324,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GGplayer_ss1_5: -787204090
-      GGplayer_ss1_1: 1255734336
-      GGplayer_ss1_13: 320540915
-      GGplayer_ss1_15: -372832588
-      GGplayer_ss1_8: -1291335962
-      GGplayer_ss1_10: 1045107408
-      GGplayer_ss1_9: 71316524
-      GGplayer_ss1_11: 58733013
-      GGplayer_ss1_6: 1672003278
-      GGplayer_ss1_12: 2029875918
-      GGplayer_ss1_2: 1940387621
-      GGplayer_ss1_3: -1976315426
-      GGplayer_ss1_14: -1525019295
-      GGplayer_ss1_0: 3424397
-      GGplayer_ss1_7: 1954098978
-      GGplayer_ss1_4: -816404063
+      npcspritesheet 64x64_8: 1274747022
+      npcspritesheet 64x64_3: 1789271237
+      npcspritesheet 64x64_0: 1599632973
+      npcspritesheet 64x64_4: -416772400
+      npcspritesheet 64x64_7: -2146664056
+      npcspritesheet 64x64_5: 908357085
+      npcspritesheet 64x64_1: -723571908
+      npcspritesheet 64x64_6: 1487365743
+      npcspritesheet 64x64_9: 157108584
+      npcspritesheet 64x64_2: -1556264070
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

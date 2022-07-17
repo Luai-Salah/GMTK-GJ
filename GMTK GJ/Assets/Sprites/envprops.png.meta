@@ -287,10 +287,10 @@ TextureImporter:
       name: veins1
       rect:
         serializedVersion: 2
-        x: 1535
-        y: 1589
-        width: 390
-        height: 111
+        x: 1576
+        y: 1584
+        width: 341
+        height: 106
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

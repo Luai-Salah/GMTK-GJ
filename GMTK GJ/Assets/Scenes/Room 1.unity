@@ -102615,6 +102615,15 @@ MonoBehaviour:
     Loop: 0
     PlayedConstantly: 1
     GameObject: {fileID: 0}
+  - Name: Land
+    Clip: {fileID: 8300000, guid: 275f6b71ac61fe7428e01e169af7cf85, type: 3}
+    Volume: 0.7
+    RandomVolume: 0.1
+    Pitch: 1
+    RandomPitch: 0.2
+    Loop: 0
+    PlayedConstantly: 1
+    GameObject: {fileID: 0}
 --- !u!114 &1709177785
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,6 +37,10 @@ namespace GMTKGJ
         // Nostalgy
         private float m_OGS = 0.0f;
         private float m_OFGM = 0.0f;
+        private float m_OJF = 0.0f;
+
+        // Anger
+        private float m_GroundTimer = 0.0f;
 
         private bool m_CoolDown = false;
         private int m_Event = 0;
@@ -44,6 +48,7 @@ namespace GMTKGJ
         private float m_CoolDownTimer = 0.0f;
 
         private PlayerMotor m_Motor;
+        private Player m_Player;
         private Animator m_VolumeAnimator;
         private Animator m_DiceAnimator;
         private Image m_DiceImage;
@@ -53,6 +58,7 @@ namespace GMTKGJ
         private void Start()
         {
             m_Motor = GetComponent<PlayerMotor>();
+            m_Player = GetComponent<Player>();
             m_VolumeAnimator = GameObject.FindGameObjectWithTag("Volume").GetComponent<Animator>();
 
             Transform dice = GameObject.FindGameObjectWithTag("Dice").transform;
@@ -71,6 +77,7 @@ namespace GMTKGJ
             switch (m_Event)
             {
                 case 1:
+                    Time.timeScale = 1.0f;
                     MusicManager.StopMusic("Attrition");
                     break;
                 case 2:
@@ -81,12 +88,15 @@ namespace GMTKGJ
                     MusicManager.StopMusic("Anger");
                     break;
                 case 4:
-                    CancelInvoke("StopMomentom");
+                    m_Motor.GravityScale = m_OGS;
+                    m_Motor.FallGravityMultiplier = m_OFGM;
+                    m_Motor.JumpForce = m_OJF;
                     MusicManager.StopMusic("Anxiety");
                     break;
                 case 5:
                     m_Motor.GravityScale = m_OGS;
                     m_Motor.FallGravityMultiplier = m_OFGM;
+                    m_Motor.JumpForce = m_OJF;
                     MusicManager.StopMusic("Nastalogy");
                     break;
                 case 6:
@@ -120,6 +130,7 @@ namespace GMTKGJ
                 case 1:
                     m_EventText.text = "Attrition";
                     m_EventText.color = Color.cyan;
+                    Time.timeScale = 0.5f;
                     MusicManager.UpdateMusic("Attrition");
                     break;
                 case 2:
@@ -131,19 +142,27 @@ namespace GMTKGJ
                 case 3:
                     m_EventText.text = "Anger";
                     m_EventText.color = Color.red;
+                    m_GroundTimer = m_TimeAllowedOnGround;
                     MusicManager.UpdateMusic("Anger");
                     break;
                 case 4:
-                    InvokeRepeating("StopMomentom", m_TimeBetweenStops, m_TimeBetweenStops);
                     m_EventText.text = "Anxiety";
                     m_EventText.color = Color.black;
+                    m_OGS = m_Motor.GravityScale;
+                    m_OFGM = m_Motor.FallGravityMultiplier;
+                    m_OJF = m_Motor.JumpForce;
+                    m_Motor.GravityScale *= 2f;
+                    m_Motor.FallGravityMultiplier *= 2f;
+                    m_Motor.JumpForce *= 2f;
                     MusicManager.UpdateMusic("Anxiety");
                     break;
                 case 5:
                     m_OGS = m_Motor.GravityScale;
                     m_OFGM = m_Motor.FallGravityMultiplier;
+                    m_OJF = m_Motor.JumpForce;
                     m_Motor.GravityScale = m_GravityScale;
                     m_Motor.FallGravityMultiplier = m_FallGravityMultiplier;
+                    m_Motor.JumpForce /= 2f;
                     m_EventText.text = "Nastalogy";
                     m_EventText.color = Color.blue;
                     MusicManager.UpdateMusic("Nastalogy");
@@ -179,6 +198,16 @@ namespace GMTKGJ
             }
             else
             {
+                if (m_Event == 3)
+                {
+                    if (m_Motor.IsGrounded)
+                        m_GroundTimer -= Time.deltaTime;
+                    else m_GroundTimer = m_TimeAllowedOnGround;
+
+                    if (m_GroundTimer <= 0.0f)
+                        m_Player.TakeDamage(1);
+                }
+
                 m_EffectTimer -= Time.deltaTime;
                 if (m_EffectTimer <= 0.0f)
                     m_EffectTimer = 0.0f;

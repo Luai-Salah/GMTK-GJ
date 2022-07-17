@@ -9,10 +9,12 @@ namespace GMTKGJ
     {
         public float GravityScale { get { return m_GravityScale; } set { m_GravityScale = value; } }
         public float FallGravityMultiplier { get { return m_FallGravityMultiplier; } set { m_FallGravityMultiplier = value; } }
+        public float JumpForce { get { return m_JumpForce; } set { m_JumpForce = value; } }
 
         public bool CollectWallJump { get { return m_CollectWallJump; } set { m_CollectWallJump = value; } }
         public bool CollectDash { get { return m_CollectDash; } set { m_CollectDash = value; } }
 
+        public bool IsGrounded { get { return m_IsGrounded; } }
         public bool FacingRight { get { return m_FacingRight; } }
 
         [Header("Movement")]
@@ -109,6 +111,8 @@ namespace GMTKGJ
 
             if (!m_IsGrounded && m_WasGrounded && m_Rigidbody.velocity.y > 0.1f)
                 AudioManager.PlaySound("Jump");
+            else if (m_IsGrounded && !m_WasGrounded)
+                AudioManager.PlaySound("Land");
         }
 
         public void Move(float move)

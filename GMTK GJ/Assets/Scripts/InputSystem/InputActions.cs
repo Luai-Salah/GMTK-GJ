@@ -229,6 +229,54 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Dialogue"",
+            ""id"": ""e8dc8f2c-1d08-4a0c-8fa9-ee3c2bdd0b43"",
+            ""actions"": [
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""998f47b6-3cbb-409d-8b35-1518718d5386"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""End"",
+                    ""type"": ""Button"",
+                    ""id"": ""75c9142b-3b41-49d0-8d7e-b2235a9a48a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""61ba97ce-97ce-40f9-9c02-3db178f4ffe0"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a97bb85-07e4-4f3a-9950-3c2528294df5"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""End"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -268,6 +316,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_MoveY = m_Player.FindAction("MoveY", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_Next = m_Dialogue.FindAction("Next", throwIfNotFound: true);
+        m_Dialogue_End = m_Dialogue.FindAction("End", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -388,6 +440,47 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private IDialogueActions m_DialogueActionsCallbackInterface;
+    private readonly InputAction m_Dialogue_Next;
+    private readonly InputAction m_Dialogue_End;
+    public struct DialogueActions
+    {
+        private @InputActions m_Wrapper;
+        public DialogueActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Next => m_Wrapper.m_Dialogue_Next;
+        public InputAction @End => m_Wrapper.m_Dialogue_End;
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
+        public void SetCallbacks(IDialogueActions instance)
+        {
+            if (m_Wrapper.m_DialogueActionsCallbackInterface != null)
+            {
+                @Next.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnNext;
+                @Next.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnNext;
+                @Next.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnNext;
+                @End.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnEnd;
+                @End.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnEnd;
+                @End.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnEnd;
+            }
+            m_Wrapper.m_DialogueActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Next.started += instance.OnNext;
+                @Next.performed += instance.OnNext;
+                @Next.canceled += instance.OnNext;
+                @End.started += instance.OnEnd;
+                @End.performed += instance.OnEnd;
+                @End.canceled += instance.OnEnd;
+            }
+        }
+    }
+    public DialogueActions @Dialogue => new DialogueActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -413,5 +506,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnMoveY(InputAction.CallbackContext context);
+    }
+    public interface IDialogueActions
+    {
+        void OnNext(InputAction.CallbackContext context);
+        void OnEnd(InputAction.CallbackContext context);
     }
 }

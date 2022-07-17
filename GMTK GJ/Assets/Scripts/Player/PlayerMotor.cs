@@ -7,6 +7,9 @@ namespace GMTKGJ
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMotor : MonoBehaviour
     {
+        public float GravityScale { get { return m_GravityScale; } set { m_GravityScale = value; } }
+        public float FallGravityMultiplier { get { return m_FallGravityMultiplier; } set { m_FallGravityMultiplier = value; } }
+
         public bool FacingRight { get { return m_FacingRight; } }
 
         [Header("Movement")]
@@ -163,6 +166,8 @@ namespace GMTKGJ
                 else if (!m_FacingRight && move > 0.0f) Flip();
             }
         }
+
+        public void Stop() { m_Rigidbody.velocity = Vector2.zero; }
 
         #region Jump
 
